@@ -1,5 +1,7 @@
 package com.epam.javahomeworks;
+
 import java.util.Scanner;
+
 public class Homework2 {
     public static void main(String[] arg) {
 // Task 1
