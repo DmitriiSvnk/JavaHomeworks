@@ -50,9 +50,9 @@ public class Homework5 {
         int negativeNumber = 0;
         for (double value : original) {
             if (value >= 0) {
-                postive [positiveNumber++] = value;// присвоить знатение value в массив positive
+                postive [positiveNumber++] = value;
             } else {
-                negative [negativeNumber++] = value;// присвоить знатение value в массив negative
+                negative [negativeNumber++] = value;
             }
         }
 
