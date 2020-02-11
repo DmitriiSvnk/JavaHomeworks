@@ -1,4 +1,4 @@
-package com.epam.HW7;
+package com.epam.javahomeworks.Homework7;
 
 public class Circle extends Shape {
     private double radius;
@@ -23,9 +23,9 @@ public class Circle extends Shape {
 
     @Override
     public double calcArea(){
-	double area;
-	area = Math.PI * Math.pow(radius, 2);
-	return area;
+        double area;
+        area = Math.PI * Math.pow(radius, 2);
+        return area;
     }
 
 }
