@@ -1,16 +1,16 @@
-package com.epam.HW7;
+package com.epam.javahomeworks.Homework7;
 
-public class Triangle extends Shape {
+public class Triangle extends Shape{
     private double a;
     private double b;
     private double c;
+    private double halfPerimeter = (a + b + c) / 2;
 
-    public Triangle(String color, double a,
-                   double b, double c) {
+    public Triangle(String color, double a, double b, double c) {
         super(color);
         this.a = a;
         this.b = b;
-	this.c = c;
+        this.c = c;
     }
 
     public double getA() {
@@ -34,16 +34,15 @@ public class Triangle extends Shape {
 
     @Override
     public String toString() {
-        return super.toString() + ", a=" + a + 
-		", b=" + b + ", c=" + c + ".";
+        return super.toString() + ", a=" + a +
+                ", b=" + b + ", c=" + c + ".";
     }
 
     @Override
     public double calcArea(){
-	double area;
-	double halfPerimeter = (a + b + c) / 2;
-	area = Math.sqrt(halfPerimeter * (halfPerimeter - a) * 
-		(halfPerimeter - b) * (halfPerimeter - c));
-	return area;
+        double area;
+        area = Math.sqrt(halfPerimeter * (halfPerimeter - a) *
+                (halfPerimeter - b) * (halfPerimeter - c));
+        return area;
     }
 }
