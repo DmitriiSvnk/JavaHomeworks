@@ -1,12 +1,13 @@
 package com.epam.javahomeworks.Homework6;
 
-import  java.util.Arrays;
-
 public class Books {
-    private Book[] books;
-    private int counter;
-    public Books() {
-        books = new Book[0];
+    Book[] books;
+    private int counter = 0;
+    private int size;
+
+    public Books(int size) {
+        this.size = size;
+        books = new Book[size];
     }
 
     public Book[] getBooks() {
@@ -17,48 +18,77 @@ public class Books {
     }
 
     public void addBook(Book book) {
-        books = Arrays.copyOf(books, books.length + 1);
-        books[counter++] = book;
+        if (counter >= size) {
+            System.out.println("The bookshelf is full!");
+        } else {
+            books[counter++] = book;
+        }
     }
+
     public void viewAllBooks() {
-        if (books.length == 0) {
-            System.out.println("Not found");
+        if (books.length <= 0) {
+            System.out.println("Books not found");
         } else {
             for (Book book : books) {
-                book.viewBook();
+                if (!(book == null)) {
+                    book.viewBook();
+                } else {
+                    break;
+                }
             }
         }
     }
+
     public void increasePrise(int percent) {
         for (Book book : books) {
-            double oldPrice = book.getPrice();
-            double margin = (oldPrice / 100) * percent;
-            double newPrice = oldPrice + margin;
-            book.setPrice(newPrice);
+            if (!(book == null)) {
+                double oldPrice = book.getPrice();
+                double margin = (oldPrice / 100) * percent;
+                double newPrice = oldPrice + margin;
+                book.setPrice(newPrice);
+            } else {
+                break;
+            }
         }
     }
+
     public void decreasePrise(int percent) {
         for (Book book : books) {
-            double oldPrice = book.getPrice();
-            double margin = (oldPrice / 100) * percent;
-            double newPrice = oldPrice - margin;
-            book.setPrice(newPrice);
+            if (!(book == null)) {
+                double oldPrice = book.getPrice();
+                double margin = (oldPrice / 100) * percent;
+                double newPrice = oldPrice - margin;
+                book.setPrice(newPrice);
+            } else {
+                break;
+            }
         }
     }
+
     public Books searchByAuthor(String author) {
-        Books selectedBooks = new Books();
+        Books selectedBooks = new Books(counter);
         for (Book book : books) {
-            if (book.getAuthor().equalsIgnoreCase(author)) {
-                selectedBooks.addBook(book);
+            if (!(book == null)) {
+                String bookAuthor = book.getAuthor();
+                if (bookAuthor.equalsIgnoreCase(author)) {
+                    selectedBooks.addBook(book);
+                }
+            } else {
+                break;
             }
         }
         return selectedBooks;
     }
+    
     public Books searchByYear(int year) {
-        Books selectedBooks = new Books();
+        Books selectedBooks = new Books(counter);
         for (Book book : books) {
-            if (book.getYear() > year) {
-                selectedBooks.addBook(book);
+            if (!(book == null)) {
+                if (book.getYear() > year) {
+                    selectedBooks.addBook(book);
+                }
+            } else {
+                break;
             }
         }
         return selectedBooks;
