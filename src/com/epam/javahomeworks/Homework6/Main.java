@@ -5,7 +5,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Books bookshelf = new Books();
+        Books bookshelf;
+
+        System.out.println("Enter size of bookshelf:");
+        int bookshelfSize = input.nextInt();
+        bookshelf = new Books(bookshelfSize);
 
         Book myBook1 = new Book(1, "Harry Potter and the Philosopher's Stone", "J.K. Rowling",
                 "Bloomsbury", 2014, 254, 199);
@@ -21,8 +25,8 @@ public class Main {
         bookshelf.viewAllBooks();
 
         System.out.println("Enter authors name to find books:");
-        String author = input.nextLine();
-        Books bookshelf2 = bookshelf.searchByAuthor(author);
+        input.nextLine();
+        Books bookshelf2 = bookshelf.searchByAuthor(input.nextLine());
         bookshelf2.viewAllBooks();
 
         System.out.println("Enter year to find books:");
