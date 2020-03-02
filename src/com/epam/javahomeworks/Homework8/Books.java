@@ -4,10 +4,15 @@ import java.util.Arrays;
 
 public class Books {
     Book[] books;
-    private int counter = 0;
+    private int possitionCounter = 0;
     private int size;
 
     public Books(int size) {
+        try {
+            Validator.verifyBooksSize(size);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
+        }
         this.size = size;
         books = new Book[size];
     }
@@ -20,28 +25,35 @@ public class Books {
     }
 
     public void addBook(Book book) {
-        if (counter >= size) {
-            System.out.println("The bookshelf is full!");
-        } else {
-            books[counter++] = book;
+        try {
+            Validator.verifyPossition(possitionCounter, size);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
         }
+        books[possitionCounter++] = book;
     }
 
     public void viewAllBooks() {
-        if (books.length <= 0) {
-            System.out.println("Books not found");
-        } else {
-            for (Book book : books) {
-                if (!(book == null)) {
-                    System.out.println(book);;
-                } else {
-                    break;
-                }
+        try {
+            Validator.verifyOccupancyRate(possitionCounter);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
+        }
+        for (Book book : books) {
+            if (!(book == null)) {
+                System.out.println(book);;
+            } else {
+                break;
             }
         }
     }
 
-    public void increasePrise(int percent) {
+    public void increasePrise(double percent) {
+        try {
+            Validator.verifyPercent(percent);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
+        }
         for (Book book : books) {
             if (!(book == null)) {
                 double oldPrice = book.getPrice();
@@ -55,6 +67,11 @@ public class Books {
     }
 
     public void decreasePrise(int percent) {
+        try {
+            Validator.verifyPercent(percent);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
+        }
         for (Book book : books) {
             if (!(book == null)) {
                 double oldPrice = book.getPrice();
@@ -68,7 +85,12 @@ public class Books {
     }
 
     public Books searchByAuthor(String author) {
-        Books selectedBooks = new Books(counter);
+        try {
+            Validator.verifyAuthor(author);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
+        }
+        Books selectedBooks = new Books(possitionCounter);
         for (Book book : books) {
             if (!(book == null)) {
                 String bookAuthor = book.getAuthor();
@@ -83,7 +105,12 @@ public class Books {
     }
     
     public Books searchByYear(int year) {
-        Books selectedBooks = new Books(counter);
+        try {
+            Validator.verifyYear(year);
+        } catch (Validator.CustomExeption myExeption) {
+            myExeption.printStackTrace();
+        }
+        Books selectedBooks = new Books(possitionCounter);
         for (Book book : books) {
             if (!(book == null)) {
                 if (book.getYear() > year) {
@@ -97,22 +124,24 @@ public class Books {
     }
 
     public void sortByAuthor() {
-        Book[] sortedBooks = Arrays.copyOf(books, counter);
+        Book[] sortedBooks = Arrays.copyOf(books, possitionCounter);
         Arrays.sort(sortedBooks, new MyComparatorAuthor());
+        viewAllBooks();
+    }
+
+    public void sortByPublicher() {
+        Book[] sortedBooks = Arrays.copyOf(books, possitionCounter);
+        Arrays.sort(sortedBooks, new MyComparatorPublisher());
         for (Book b : sortedBooks) {
             System.out.println(b);
         }
     }
 
-    public Book[] sortByPublicher() {
-        Book[] sortedBooks = Arrays.copyOf(books, counter);
-        Arrays.sort(sortedBooks, new MyComparatorPublisher());
-        return sortedBooks;
-    }
-
-    public Book[] sortByPrice() {
-        Book[] sortedBooks = Arrays.copyOf(books, counter);
+    public void sortByPrice() {
+        Book[] sortedBooks = Arrays.copyOf(books, possitionCounter);
         Arrays.sort(sortedBooks, new MyComparatorPrice());
-        return sortedBooks;
+        for (Book b : sortedBooks) {
+            System.out.println(b);
+        }
     }
 }

@@ -36,12 +36,11 @@ public class Main {
         int year = input.nextInt();
         Books bookshelf3 = bookshelf.searchByYear(year);
         bookshelf3.viewAllBooks();
-        System.out.println("----------------------------------------");
+        System.out.println("*******************************************************************");
         bookshelf.sortByAuthor();
-        System.out.println("----------------------------------------");
+        System.out.println("*******************************************************************");
         bookshelf.sortByPublicher();
-        System.out.println("----------------------------------------");
+        System.out.println("*******************************************************************");
         bookshelf.sortByPrice();
-
     }
 }
